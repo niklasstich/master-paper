@@ -3,20 +3,34 @@ Monero ist eine dezentralisierte Proof-of-Work (PoW) Kryptowährung, basierend a
 Die wichtgsten Ziele der Währung Monero sind die Ermöglichung anonymer, privater Transaktionen, Sicherheit der Benutzer sowie Nichtnachvollziehbarkeit von Addressen und Transaktionen im Ledger.
 Monero gehört somit zu den sogenannten ``Privacy Coins''.
 
-\section{Privacy Coins}
 Als Privacy Coins werden solche Kryptowährungen bezeichnet, welche den Benutzern vollständige Anonymität über ihre Transaktionen, den beteiligten Personen sowie transferierten Beträgen
 und in Folge Verschleiern von Besitztümern vor Dritten garantieren.
-Sie stehen hiermit im Kontrast zu anderen, konventionelleren Kryptowährungen wie Bitcoin oder Ethereum, welche ihren Benutzern lediglich Pseudonymität versprechen\cite{Vermaak2021} (mehr dazu in Kapitel \ref{reasons}).
+Sie stehen hiermit im Kontrast zu anderen, konventionelleren Kryptowährungen wie Bitcoin oder Ethereum, welche ihren Benutzern lediglich Pseudonymität versprechen\cite{Vermaak2021} (mehr dazu in Kapitel \ref{anonymity}).
 Andere bekannte Privacy Coins neben Monero sind beispielsweise Dash und Zcash, beide sind Bitcoin-Forks, Beam oder Grin. Diese verwenden unterschiedliche Technologien um ihren Benutzern Anonymität anzubieten.\\
 Aufgrund diverser externer Faktoren, unter anderem gesetzliche Faktoren auf die in Kapitel \ref{legal} eingegangen wird, besitzen die meisten Privacy Coins nur marginale Anteile der Gesamtmarktkapitalisierung im Bereich der Kryptowährungen, 
 mit Monero als Anführer auf ungefähr Platz 25 mit ca. 4 Mrd. US-Dollar Marktkapitalisierung (Stand Juli 2021)\cite{CoinMarketCap2021}.
 
-\section{Untracability}
 
+\chapter{Kryptowährungen und Anonymität - ein Widerspruch?} \label{anonymity}
+Zunächst einmal muss der Begriff Anonymität genauer definiert werden. Wir können eine Kryptowährung dann als anonym bezeichnen,
+wenn die folgenden Punkte gegeben sind: 
+\begin{enumerate}
+    \item Dritte können Benutzer des Systems nicht von anderen Nutzern unterscheiden, die ähnliche Aktionen durchführen (z.B. Transaktionen senden und empfangen)\cite{Bleumer2011b}.
+    \item Transferierte Beträge in Transaktionen sind für Dritte nicht einsehbar.
+    \item Transaktionen erfüllen das Kriterium der ``Unlinkability'': 
+\end{enumerate} 
 
-\section{Unlinkability}
+Für Leser, welche nur mit der Funktionsweise ``traditioneller'' Kryptowährungen wie Bitcoin oder Ethereum vertraut sind und Monero lediglich oberflächlich kennen, 
+mag es zunächst kontraintuitiv oder eventuell sogar widersprüchlich klingen eine anonyme Blockchain zu kreieren, wo sich klassische Blockchains doch gerade dadurch auszeichnen,
+dass jeder Teilnehmer des Netzwerks jede bisher getätigte Transaktion verifizieren kann. Hierfür ist es typischerweise nötig, sowohl den Sender als auch den Empfänger sowie
+den Betrag jeder Transaktion zu kennen, um die Kette von Transaktionen seit dem Genesisblock nachzuvollziehen. Diese Anforderung ergibt sich aus dem Fakt, dass alle erhaltenen Transaktionsoutputs nur einmal
+ausgegeben werden dürfen (Verhindern von Double-Spending). Aus diesem Grund wird der Ledger, welcher alle Transaktionsdaten enthält,
+dezentral durch alle Teilnehmer des Netzwerks gespeichert.\footnote{Auf den Unterschied zwischen Full Nodes und Lightweight Clients, welche nicht selbst eine Kopie der vollständigen
+Blockchain halten, soll hier nicht weiter eingegangen werden, hierzu sei z.B. auf Bitcoin SPV und die diversen web- und mobilebasierten Bitcoinwallets verwiesen (bspw. https://bitcoin.org/en/wallets/mobile/android/bitcoinwallet/). }\\
 
-\chapter{Kryptowährungen und Anonymität - ein Widerspruch?}
+Monero stellt dieses Konzept nun auf den Kopf, indem Dritte weder Sender, Empfänger noch Betrag von Transaktionen kennen. Man mag nun naiverweise annehmen, dass Transaktionen
+in einer solchen Kryptowährung nicht verifizierbar sind. Durch die clevere Anwendung verschiedener kryptographischer Verfahren ist es jedoch trotz Anonymität dennoch möglich, Transaktionen
+auf Monero zu verifizieren und somit die Integrität der Währung zu gewährleisten. Auf die verwendeten Technologien wird in Kapitel \ref{tech} eingegangen.
 
 \chapter{Legitime Gründe für anonyme Zahlungen oder: Warum Monero wichtig ist} \label {reasons}
 
@@ -24,11 +38,11 @@ mit Monero als Anführer auf ungefähr Platz 25 mit ca. 4 Mrd. US-Dollar Marktka
 
 \chapter{Beispieltransaktionen in Monero}
 
-\chapter{Wie funktioniert Monero?}
+\chapter{Wie funktioniert Monero?} \label{tech}
 
 \section{Elliptische Kurven und Schlüssel}
 
-\section{One-time Addresses}
+\section{One-time Stealth Addresses}
 
 \section{Ring Signatures}
 
