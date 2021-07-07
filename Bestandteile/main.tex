@@ -16,15 +16,18 @@ Zunächst einmal muss der Begriff Anonymität genauer definiert werden. Wir kön
 wenn die folgenden Punkte gegeben sind: 
 \begin{enumerate}
     \item Dritte können Benutzer des Systems nicht von anderen Nutzern unterscheiden, die ähnliche Aktionen durchführen (z.B. Transaktionen senden und empfangen)\cite{Bleumer2011b}.
-    \item Transferierte Beträge in Transaktionen sind für Dritte nicht einsehbar.
-    \item Transaktionen erfüllen das Kriterium der ``Unlinkability'': 
+    \item Transferierte Beträge in Transaktionen sind für Dritte nicht einsehbar. Monero stellt dies durch die Verwendung von RingCT sicher, siehe dazu Abschnitt \ref{ringct}.
+    \item Transaktionen erfüllen das Kriterium der ``Unlinkability'': Die Empfänger-Adresse einer beliebigen Transaktion bietet keinen Rückschluss darauf welche öffentliche Walletadresse zu der Transaktion gehört, und umgekehrt\cite{Bleumer2011a}.
+    Unlinkability wird in Monero durch den Einsatz von Stealth Addresses sichergestellt\cite{MP}, welche in Abschnitt \ref{stealth} vorgestellt werden.
+    \item Transferierte Tokens erfüllen das Kriterium der ``Untraceability'': Dritten ist es durch Analyse der Blockchain nicht möglich nachzuvollziehen, in welchen vorherigen Transaktionen die Tokens in einer beliebigen Transakion verwendet wurden\cite{Bleumer2011}.
+    Die Verwendung von Ring Signaturen ermöglicht dies in Monero, mehr dazu in Abschnitt \ref{ringsig}.
 \end{enumerate} 
 
 Für Leser, welche nur mit der Funktionsweise ``traditioneller'' Kryptowährungen wie Bitcoin oder Ethereum vertraut sind und Monero lediglich oberflächlich kennen, 
 mag es zunächst kontraintuitiv oder eventuell sogar widersprüchlich klingen eine anonyme Blockchain zu kreieren, wo sich klassische Blockchains doch gerade dadurch auszeichnen,
 dass jeder Teilnehmer des Netzwerks jede bisher getätigte Transaktion verifizieren kann. Hierfür ist es typischerweise nötig, sowohl den Sender als auch den Empfänger sowie
 den Betrag jeder Transaktion zu kennen, um die Kette von Transaktionen seit dem Genesisblock nachzuvollziehen. Diese Anforderung ergibt sich aus dem Fakt, dass alle erhaltenen Transaktionsoutputs nur einmal
-ausgegeben werden dürfen (Verhindern von Double-Spending). Aus diesem Grund wird der Ledger, welcher alle Transaktionsdaten enthält,
+ausgegeben werden dürfen (Verhindern von Double-Spending) und nur rechtmäßige Besitzer Transaktionen ihrer Geldwerte authorisieren können. Aus diesem Grund wird der Ledger, welcher alle Transaktionsdaten enthält,
 dezentral durch alle Teilnehmer des Netzwerks gespeichert.\footnote{Auf den Unterschied zwischen Full Nodes und Lightweight Clients, welche nicht selbst eine Kopie der vollständigen
 Blockchain halten, soll hier nicht weiter eingegangen werden, hierzu sei z.B. auf Bitcoin SPV und die diversen web- und mobilebasierten Bitcoinwallets verwiesen (bspw. https://bitcoin.org/en/wallets/mobile/android/bitcoinwallet/). }\\
 
@@ -33,6 +36,28 @@ in einer solchen Kryptowährung nicht verifizierbar sind. Durch die clevere Anwe
 auf Monero zu verifizieren und somit die Integrität der Währung zu gewährleisten. Auf die verwendeten Technologien wird in Kapitel \ref{tech} eingegangen.
 
 \chapter{Legitime Gründe für anonyme Zahlungen oder: Warum Monero wichtig ist} \label {reasons}
+Kritiker von Kryptowährungen führen oft das Argument an, dass diese durch Kriminelle genutzt werden können um ihre Geldflüsse vor Ermittlungsbehörden zu verstecken. Anonyme Kryptowährungen wie Monero 
+bieten für dieses Argument noch mehr Angriffsfläche, da sie im Gegensatz zu bspw. Bitcoin tatsächlich vollständige Anonymität bieten und somit noch besser für kriminelle Machenschaften wie Geldwäsche oder
+Steuerhinterziehung geeignet sind. Es gibt jedoch auch viele legitime Gründe abseits krimineller Interressen, anonyme Währungen zu verwenden, einiger dieser Gründe sollen im Folgenden präsentiert werden.
+\begin{itemize}
+    \item \textbf{Verfolgung durch Regierungen:} Staatsbürger repressiver Staaten wie beispielsweise China stehen oft unter genauer Beobachtung durch ihre Regierung. Die Verwendung von Währungen wie Monero bietet diesen Personen eine neue finanzielle Freiheit
+    für Waren oder Dienstleistungen zu bezahlen, welche in ihrem Land eventuell illegal sind, im Rest der Welt aber als legal oder normal angesehen werden.
+    \item \textbf{Zensur:} Die Annahme anonymer Spenden kann helfen Zensur durch Staaten zu umgehen. Unabhängigen oder regierungskritischen Journalisten kann so ihre Arbeit ermöglicht werden.
+    \item \textbf{Werterhaltung durch Fungibility:} Fungibility bedeutet simpel ausgedrückt, dass alle Tokens einer Währung miteinander austauschbar sind und gleich viel Wert sind. In pseudonymen Blockchains welche das Kriterium der Untraceability nicht erfüllen 
+    ist dies nicht der Fall, bspw. sind Bitcoins, welche nachweislich in illegalen Transaktionen verwendet wurden für immer ``verdorben''\footnote{Siehe hierzu z.B. die Nachverfolgung von Bitcoins der Schwarzmarkthandelsbörse ``Silk Road'' und Beschlagnahmungen
+    dieser Tokens durch US-Behörden:https://mashable.com/article/hacker-stole-billion-cryptocurrency-silk-road-seized-us-government/?europe=true }, und Teilnehmer des Systems könnten der Meinung sein, dass diese Tokens daher weniger Wert sind. In diesem Sinne trägt
+    die Anonymität einer Währung zu ihrer eigenen Werterhaltung bei.
+    \item \textbf{Anonyme Geschenke und Spenden:} Personen, die Geldwerte für gemeinnützige Zwecke spenden haben eventuell ein Interesse daran, ihre Person geheim zu halten, vor allem wenn es sich um größere Summen handelt. Durch die Verwendung einer 
+    anonymen Währung müssen diese Personen nicht darauf vertrauen, dass die Organisation an welche sie spenden diesen Wunsch respektiert und ihre Person geheim halten.
+    \item \textbf{Verbergen des eigenen Besitzes:} Besitzer größerer Mengen von Geld möchten unter Umständen nicht, dass die Menge ihres Besitzes öffentlich einsehbar ist, wie es bei traditionellen Kryptowährungen durchaus der Fall ist. Man denke
+    hierbei zum Beispiel an Lottogewinner, die durch ihre Freunde und Familien zum Verschenken ihres Geldes genötigt werden. Die Ausnutzung dieser Eigenschaft von Monero zur Steuerhinterziehung o. ä. muss hierbei natürlich stark verurteilt werden!
+    \item \textbf{Flucht vor Datenkraken und Werbung:} Daten sind in unserer postmodernen Welt ein unglaublich wertvolles Gut und Datenkraken wie Google, Microsoft oder Amazon sind sehr an der Sammlung und Auswertung von Kauf- und Zahlungsdaten interessiert.
+    Zudem spezialisieren sich diverse Unternehmen in der Branche der Kryptowährungen auf Analyse der Blockchain, um noch mehr solcher Daten zu gewinnen, auszuwerten und zu verkaufen. Durch Zahlung mit Monero kann dieser Datensammlung zumindest zum Teil entzogen werden.
+    \item \textbf{Freiheits- und Privatssphäre als Menschenrecht:} Laut UN-Menschenrechtskonvention hat jeder Mensch ein Recht auf Privatssphäre\cite[vgl. Artikel 12]{UniNations1948}. Dieses Recht wird, wie in den vorherigen Punkten ersichtlich,
+    durch anonyme und unzensierbare Kryptowährungen wie Monero untermauert und zum Teil für marginalisiert, diskriminierte oder unterdrückte Personen zum Teil erst ermöglicht.
+\end{itemize}
+Wie aus den angeführten Punkten ersichtlich füllen Privacy Coins eine Nische im sehr diversen Feld der Kryptowährungen aus und sind im täglichen Leben für viele Personen eventuell sogar überlebenswichtig. Der Fakt, das kriminelle Aktionen durch sie ermöglicht oder
+vereinfacht werden, ist der Meinung des Autors nach leider als nötiges Übel hinzunehmen.
 
 \chapter{Historie des Monero-Projekts}
 
@@ -42,11 +67,11 @@ auf Monero zu verifizieren und somit die Integrität der Währung zu gewährleis
 
 \section{Elliptische Kurven und Schlüssel}
 
-\section{One-time Stealth Addresses}
+\section{One-time Stealth Addresses} \label{stealth}
 
-\section{Ring Signatures}
+\section{Ring Signatures} \label{ringsig}
 
-\section{RingCT}
+\section{RingCT} \label{ringct}
 
 \section{RandomX}
 
