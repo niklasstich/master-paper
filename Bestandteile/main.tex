@@ -1,6 +1,6 @@
 \chapter{Was ist Monero?}
 Monero ist eine dezentralisierte Proof-of-Work (PoW) Kryptowährung, basierend auf einer gleichnamigen, verteilten Blockchain\cite[vgl. Abstract]{Koe2020}.
-Die wichtgsten Ziele der Währung Monero sind die Ermöglichung anonymer, privater Transaktionen, Sicherheit der Benutzer sowie Nichtnachvollziehbarkeit von Addressen und Transaktionen im Ledger.
+Die wichtgsten Ziele der Währung Monero sind die Ermöglichung anonymer, privater Transaktionen, Sicherheit der Benutzer sowie Nichtnachvollziehbarkeit von Adressen und Transaktionen im Ledger.
 Monero gehört somit zu den sogenannten ``Privacy Coins''.
 
 Als Privacy Coins werden solche Kryptowährungen bezeichnet, welche den Benutzern vollständige Anonymität über ihre Transaktionen, den beteiligten Personen sowie transferierten Beträgen
@@ -22,6 +22,11 @@ wenn die folgenden Punkte gegeben sind:
     \item Transferierte Tokens erfüllen das Kriterium der ``Untraceability'': Dritten ist es durch Analyse der Blockchain nicht möglich nachzuvollziehen, in welchen vorherigen Transaktionen die Tokens in einer beliebigen Transakion verwendet wurden\cite{Bleumer2011}.
     Die Verwendung von Ring Signaturen ermöglicht dies in Monero, mehr dazu in Abschnitt \ref{ringsig}.
 \end{enumerate} 
+
+Der Begriff der Anonymität darf nicht mit Pseudonymität verwechselt werden. Bei konventionellen Blockchains, auf denen weder Unlinkability noch Untraceability gegeben sind, sind Nutzer zunächst zwar durch die zufällig generierten Walletadressen 
+pseudonymisiert, es wird also nicht direkt ein Zusammenhang zu der Person welche hinter den Transaktionen steckt gebildet. Gelingt es jemandem jedoch diese Adresse einer echten Person zuzuordnen, so ist die gesamte Transaktionshistorie 
+dieser Adresse mit der Person verknüpfbar. Daraus können Rückschlüsse auf das Verhalten der Person gezogen werden, bspw. welche Broker die Person verwendet hat, mit welchen anderen Personen die Person Transaktionen durchgeführt hat (falls diese Adressen widerum auch
+anderen Personen zuzuordnen sind) oder wie viele Tokens einer Währung die Person besitzt. Mit vollständiger Unlinkability, Untraceability und Anonymität sind diese Rückschlüsse unmöglich.
 
 Für Leser, welche nur mit der Funktionsweise ``traditioneller'' Kryptowährungen wie Bitcoin oder Ethereum vertraut sind und Monero lediglich oberflächlich kennen, 
 mag es zunächst kontraintuitiv oder eventuell sogar widersprüchlich klingen eine anonyme Blockchain zu kreieren, wo sich klassische Blockchains doch gerade dadurch auszeichnen,
@@ -56,11 +61,20 @@ Steuerhinterziehung geeignet sind. Es gibt jedoch auch viele legitime Gründe ab
     \item \textbf{Freiheits- und Privatssphäre als Menschenrecht:} Laut UN-Menschenrechtskonvention hat jeder Mensch ein Recht auf Privatssphäre\cite[vgl. Artikel 12]{UniNations1948}. Dieses Recht wird, wie in den vorherigen Punkten ersichtlich,
     durch anonyme und unzensierbare Kryptowährungen wie Monero untermauert und zum Teil für marginalisiert, diskriminierte oder unterdrückte Personen zum Teil erst ermöglicht.
 \end{itemize}
-Wie aus den angeführten Punkten ersichtlich füllen Privacy Coins eine Nische im sehr diversen Feld der Kryptowährungen aus und sind im täglichen Leben für viele Personen eventuell sogar überlebenswichtig. Der Fakt, das kriminelle Aktionen durch sie ermöglicht oder
+Wie aus den angeführten Punkten ersichtlich füllen Privacy Coins eine Nische im sehr diversen Feld der Kryptowährungen aus und sind im täglichen Leben für manche Personen eventuell sogar überlebenswichtig. Der Fakt, das kriminelle Aktionen durch sie ermöglicht oder
 vereinfacht werden, ist der Meinung des Autors nach leider als nötiges Übel hinzunehmen.
 
 \chapter{Historie des Monero-Projekts}
+Die Geschichte der Kryptowährung, welche heute als Monero bezeichnet wird, beginnt 2013 durch die Veröffentlichung des Papers und gleichnamigem Protokoll ``CryptoNote'' durch das pseudonyme Person ``Nicolas van Saberhagen'' in dem Forum Bitcointalk
+\footnote{Das originale CryptoNote Paper ist unter https://bytecoin.org/old/whitepaper.pdf verfügbar. }. Ziel der Veröffentlichung war es unter anderem das Problem der fehlenden Anonymität in Bitcoin zu lösen\cite[vgl. Seite 1]{Saberhagen2013}. \\
 
+Forumnutzer ``thankful\_for\_today'' forkte das Projekt und entwickelte es unter dem Namen ``Bitmonero'' weiter. 2014 wird ``thankful\_for\_today'' inaktiv und die Community, welche mit dem Stand der Entwicklung des Projekts unzufriden war 
+forkte das Projekt erneut, nun unter dem Namen Monero\footnote{Esperanto für Geld oder Währung.}. Das Projekt wird seitdem ständig durch die Community weiterentwickelt und verbessert. Aufgrund dieser Entwicklung ist es schwierig,
+Monero ein einzelnes Whitepaper zuzuordnen, welches die Währung und die Technologie ausreichend detailliert beschreibt, wie es bei anderen Währungen der Fall ist. Stattdessen verfassten Mitglieder der Community eigenständig
+Bücher über Monero, welche die Funktionsweise des Systems detailliert beschreiben, siehe hierzu \cite{Koe2020} und \cite{SerHack2019}.
+
+Durch die weite Verbreitung von Schwarzmärkten auf dem TOR-Netzwerk um das Jahr 2016 fand Monero zu dieser Zeit großen Zulauf. Eine weiterhin nennenswerte Weiterentwicklung des Protokolls ist die Einführung von RingCT im Januar 2017,
+was die Verschleierung von Transaktionsmengen drastisch vereinfacht hat (siehe Abschnitt \ref{ringct}).
 \chapter{Beispieltransaktionen in Monero}
 
 \chapter{Wie funktioniert Monero?} \label{tech}
